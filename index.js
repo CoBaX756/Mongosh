@@ -6,10 +6,12 @@ const mongoose = require('mongoose');
 
 let app = express();
 
+
+/** 
 app.use(cors({
     origin: ['http://localhost:8080', 'http://127.0.0.1:8080', 'http://playalmi.duckdns.org:8080', 'http://18.215.6.232:8080', 'http://playalmi.duckdns.org']
 }));
-
+*/
 
 app.use(bodyParser.urlencoded({
     extended: true
