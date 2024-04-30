@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-//const apiRoutes = require('./api');
+const apiRoutes = require('./api');
 //const cors = require('cors');
 
 let app = express();
@@ -36,4 +36,4 @@ app.listen(port, function () {
     console.log("Running on port: " + port);
 });
 
-//app.use('/', apiRoutes);
+app.use('/', apiRoutes);
