@@ -31,3 +31,16 @@ exports.altaContenido = async (req, res) => {
         res.status(400).json({ mensaje: 'Error al dar de alta el contenido', error: error.message });
     }
 };
+
+exports.bajaContenido = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const resultado = await Contenido.findByIdAndDelete(id);
+        if (!resultado) {
+            return res.status(404).json({ mensaje: 'El contenido no fue encontrado' });
+        }
+        res.status(200).json({ mensaje: 'Contenido eliminado correctamente' });
+    } catch (error) {
+        res.status(400).json({ mensaje: 'Error al eliminar el contenido', error: error.message });
+    }
+};

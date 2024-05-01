@@ -12,4 +12,6 @@ router.get('/peliculas', controlador.obtenerPeliculas);
 
 router.post('/alta', controlador.altaContenido); // Ruta para dar de alta un contenido
 
+router.delete('/baja/:id', controlador.bajaContenido); // Ruta para eliminar contenido
+
 module.exports = router;
