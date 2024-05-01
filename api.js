@@ -8,7 +8,8 @@ router.get('/status', (req, res) => {
 
 router.get('/series', controlador.obtenerSeries);
 
-// Ruta para obtener todas las películas
 router.get('/peliculas', controlador.obtenerPeliculas);
+
+router.post('/alta', controlador.altaContenido); // Ruta para dar de alta un contenido
 
 module.exports = router;

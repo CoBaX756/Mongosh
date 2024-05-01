@@ -21,3 +21,13 @@ exports.obtenerPeliculas = async (req, res) => {
         res.status(500).json({ mensaje: 'Error al obtener las películas', error: error.message });
     }
 };
+
+exports.altaContenido = async (req, res) => {
+    try {
+        const nuevoContenido = new Contenido(req.body);
+        const resultado = await nuevoContenido.save();
+        res.status(201).json(resultado);
+    } catch (error) {
+        res.status(400).json({ mensaje: 'Error al dar de alta el contenido', error: error.message });
+    }
+};
