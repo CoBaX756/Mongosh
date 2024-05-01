@@ -14,4 +14,6 @@ router.post('/alta', controlador.altaContenido); // Ruta para dar de alta un con
 
 router.delete('/baja/:id', controlador.bajaContenido); // Ruta para eliminar contenido
 
+router.put('/modificar/:id', controlador.modificarContenido); // Ruta para modificar contenido
+
 module.exports = router;

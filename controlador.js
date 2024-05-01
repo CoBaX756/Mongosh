@@ -44,3 +44,16 @@ exports.bajaContenido = async (req, res) => {
         res.status(400).json({ mensaje: 'Error al eliminar el contenido', error: error.message });
     }
 };
+
+exports.modificarContenido = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const resultado = await Contenido.findByIdAndUpdate(id, req.body, { new: true });
+        if (!resultado) {
+            return res.status(404).json({ mensaje: 'El contenido no fue encontrado' });
+        }
+        res.status(200).json({ mensaje: 'Contenido modificado correctamente', contenido: resultado });
+    } catch (error) {
+        res.status(400).json({ mensaje: 'Error al modificar el contenido', error: error.message });
+    }
+};
