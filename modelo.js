@@ -35,7 +35,14 @@ const contenidoSchema = new mongoose.Schema({
     director: String,
     temporadas: [temporadaSchema] // Array de temporadas (solo para series)
 });
-
+contenidoSchema.virtual('valoracionMedia').get(function() {
+    if (this.valoraciones && this.valoraciones.length > 0) {
+        const suma = this.valoraciones.reduce((total, valoracion) => total + valoracion.puntuacion, 0);
+        return suma / this.valoraciones.length;
+    } else {
+        return 0;
+    }
+});
 // Crear los modelos a partir de los esquemas
 const Valoracion = mongoose.model('Valoracion', valoracionSchema);
 const Contenido = mongoose.model('Contenido', contenidoSchema);
@@ -44,12 +51,3 @@ const Temporada = mongoose.model('Temporada', temporadaSchema);
 
 // Exportar los modelos para su uso en otros archivos
 module.exports = { Valoracion, Contenido, Capitulo, Temporada };
-
-Contenido.virtual('valoracionMedia').get(function() {
-    if (this.valoraciones && this.valoraciones.length > 0) {
-        const suma = this.valoraciones.reduce((total, valoracion) => total + valoracion.puntuacion, 0);
-        return suma / this.valoraciones.length;
-    } else {
-        return 0;
-    }
-});
