@@ -99,9 +99,10 @@ exports.obtenerTop10 = async (req, res) => {
 exports.top10resumido = async (req, res) => {
     try {
         const top10 = await Contenido.find({ tipo: { $in: ['pelicula', 'serie'] } })
-            .sort({ puntuacion: -1 })
+            .sort({ 'valoracionMedia': -1 })
             .limit(10)
-            .select('titulo tipo puntuacion');
+            .select('titulo tipo valoracionMedia')
+            .setOptions({ virtuals: true });
 
         res.json(top10);
     } catch (error) {

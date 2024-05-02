@@ -44,3 +44,12 @@ const Temporada = mongoose.model('Temporada', temporadaSchema);
 
 // Exportar los modelos para su uso en otros archivos
 module.exports = { Valoracion, Contenido, Capitulo, Temporada };
+
+Contenido.virtual('valoracionMedia').get(function() {
+    if (this.valoraciones && this.valoraciones.length > 0) {
+        const suma = this.valoraciones.reduce((total, valoracion) => total + valoracion.puntuacion, 0);
+        return suma / this.valoraciones.length;
+    } else {
+        return 0;
+    }
+});
