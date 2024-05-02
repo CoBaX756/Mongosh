@@ -95,9 +95,6 @@ exports.obtenerTop10 = async (req, res) => {
         res.status(500).json({ mensaje: 'Error al obtener el contenido', error: error.message });
     }
 };
-const mongoose = require('mongoose');
-
-const Contenido = mongoose.model('contenido');
 
 exports.obtenerTop10Resumido = async (req, res) => {
     try {
