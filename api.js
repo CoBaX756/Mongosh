@@ -18,9 +18,9 @@ router.put('/modificar/:id', controlador.modificarContenido); // Ruta para modif
 
 router.get('/series/:genero', controlador.obtenerSeriesPorGeneros);
 router.get('/peliculas/:genero', controlador.obtenerPeliculasPorGeneros);
-
 router.get('/contenido/:genero', controlador.obtenerContenidoPorGeneros);
 
 router.get('/top10', controlador.obtenerTop10);
+router.get('/top10resumido', controlador.obtenerTop10Resumido);
 
 module.exports = router;
