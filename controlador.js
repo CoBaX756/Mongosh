@@ -90,3 +90,12 @@ exports.obtenerContenidoPorGeneros = async (req, res) => {
         res.status(500).json({ mensaje: 'Error al obtener el contenido', error: error.message });
     }
 };
+
+exports.obtenerTop10 = async (req, res) => {
+    try {
+        const contenido = await Contenido.find().sort({ puntuacionMedia: -1 }).limit(10);
+        res.json(contenido);
+    } catch (error) {
+        res.status(500).json({ mensaje: 'Error al obtener el contenido', error: error.message });
+    }
+};

@@ -21,4 +21,6 @@ router.get('/peliculas/:genero', controlador.obtenerPeliculasPorGeneros);
 
 router.get('/contenido/:genero', controlador.obtenerContenidoPorGeneros);
 
+router.get('/top10', controlador.obtenerTop10);
+
 module.exports = router;
