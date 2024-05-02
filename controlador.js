@@ -64,16 +64,17 @@ const Pelicula = require('./modelo').Pelicula;
 
 exports.obtenerSeriesPorGeneros = async (req, res) => {
     try {
-        const series = await Serie.find({ generos: req.params.genero });
+        const series = await Contenido.find({ tipo: 'serie', generos: req.params.genero });
         res.json(series);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
 };
 
+// Controlador para obtener películas por género
 exports.obtenerPeliculasPorGeneros = async (req, res) => {
     try {
-        const peliculas = await Pelicula.find({ generos: req.params.genero });
+        const peliculas = await Contenido.find({ tipo: 'pelicula', generos: req.params.genero });
         res.json(peliculas);
     } catch (err) {
         res.status(500).json({ message: err.message });
