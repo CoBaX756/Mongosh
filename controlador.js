@@ -96,13 +96,16 @@ exports.obtenerTop10 = async (req, res) => {
     }
 };
 
-exports.obtenerTop10Resumido = async (req, res) => {
+exports.top10resumido = async (req, res) => {
     try {
-        const peliculas = await Contenido.find({ tipo: 'pelicula' }).sort({ puntuacion: -1 }).limit(10).select('titulo tipo -_id');
-        const series = await Contenido.find({ tipo: 'serie' }).sort({ puntuacion: -1 }).limit(10).select('titulo tipo -_id');
-        res.json({ peliculas, series });
+        const top10 = await Contenido.find({ tipo: { $in: ['pelicula', 'serie'] } })
+            .sort({ puntuacion: -1 })
+            .limit(10)
+            .select('titulo tipo puntuacion');
+
+        res.json(top10);
     } catch (error) {
-        console.error(error); // Esto registrará el error en la consola
-        res.status(500).send('Hubo un error al obtener el top 10 resumido de películas y series');
+        console.error(error);
+        res.status(500).send('Hubo un error al obtener el top 10');
     }
 }
