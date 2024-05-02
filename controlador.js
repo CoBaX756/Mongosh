@@ -99,8 +99,7 @@ exports.obtenerTop10 = async (req, res) => {
         res.status(500).json({ mensaje: 'Error al obtener el contenido', error: error.message });
     }
 };
-
-obtenerTop10Resumido: async (req, res) => {
+exports.obtenerTop10Resumido = async (req, res) => {
     try {
         const peliculas = await Pelicula.find().sort({ puntuacion: -1 }).limit(10).select('titulo tipo puntuacion -_id');
         const series = await Serie.find().sort({ puntuacion: -1 }).limit(10).select('titulo tipo puntuacion -_id');
