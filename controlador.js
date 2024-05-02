@@ -99,12 +99,14 @@ exports.obtenerTop10 = async (req, res) => {
         res.status(500).json({ mensaje: 'Error al obtener el contenido', error: error.message });
     }
 };
+// En tu archivo controlador.js
 exports.obtenerTop10Resumido = async (req, res) => {
     try {
         const peliculas = await Pelicula.find().sort({ puntuacion: -1 }).limit(10).select('titulo tipo -_id');
         const series = await Serie.find().sort({ puntuacion: -1 }).limit(10).select('titulo tipo -_id');
         res.json({ peliculas, series });
     } catch (error) {
+        console.error(error); // Esto registrará el error en la consola
         res.status(500).send('Hubo un error al obtener el top 10 resumido de películas y series');
     }
 }
