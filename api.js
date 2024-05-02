@@ -16,4 +16,9 @@ router.delete('/baja/:id', controlador.bajaContenido); // Ruta para eliminar con
 
 router.put('/modificar/:id', controlador.modificarContenido); // Ruta para modificar contenido
 
+router.get('/series/:genero', controlador.obtenerSeriesPorGenero);
+router.get('/peliculas/:genero', controlador.obtenerPeliculasPorGenero);
+
+router.get('/contenido/:genero', controlador.obtenerContenidoPorGenero);
+
 module.exports = router;
