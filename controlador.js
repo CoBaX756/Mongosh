@@ -58,10 +58,6 @@ exports.modificarContenido = async (req, res) => {
     }
 };
 
-// Asegúrate de que tu modelo de Mongoose tenga un campo 'genero'
-const Serie = require('./modelo').Serie;
-const Pelicula = require('./modelo').Pelicula;
-
 exports.obtenerSeriesPorGeneros = async (req, res) => {
     try {
         const series = await Contenido.find({ tipo: 'serie', generos: req.params.genero });
@@ -99,11 +95,14 @@ exports.obtenerTop10 = async (req, res) => {
         res.status(500).json({ mensaje: 'Error al obtener el contenido', error: error.message });
     }
 };
-// En tu archivo controlador.js
+const mongoose = require('mongoose');
+
+const Contenido = mongoose.model('contenido');
+
 exports.obtenerTop10Resumido = async (req, res) => {
     try {
-        const peliculas = await Pelicula.find().sort({ puntuacion: -1 }).limit(10).select('titulo tipo -_id');
-        const series = await Serie.find().sort({ puntuacion: -1 }).limit(10).select('titulo tipo -_id');
+        const peliculas = await Contenido.find({ tipo: 'pelicula' }).sort({ puntuacion: -1 }).limit(10).select('titulo tipo -_id');
+        const series = await Contenido.find({ tipo: 'serie' }).sort({ puntuacion: -1 }).limit(10).select('titulo tipo -_id');
         res.json({ peliculas, series });
     } catch (error) {
         console.error(error); // Esto registrará el error en la consola
