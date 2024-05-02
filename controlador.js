@@ -96,17 +96,31 @@ exports.obtenerTop10 = async (req, res) => {
     }
 };
 
-exports.top10resumido = async (req, res) => {
-    try {
-        const top10 = await Contenido.find({ tipo: { $in: ['pelicula', 'serie'] } })
-            .sort({ 'valoracionMedia': -1 })
-            .limit(10)
-            .select('titulo tipo valoracionMedia')
-            .setOptions({ virtuals: true });
-
-        res.json(top10);
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Hubo un error al obtener el top 10');
-    }
-}
+exports.top10resumido = (req, res) => {
+    Contenido.aggregate([
+        {
+            $addFields: {
+                valoracionMedia: { $avg: "$valoraciones.puntuacion" }
+            }
+        },
+        {
+            $project: {
+                titulo: 1,
+                tipo: 1,
+                valoracionMedia: 1
+            }
+        },
+        {
+            $sort: { valoracionMedia: -1 }
+        },
+        {
+            $limit: 10
+        }
+    ])
+    .then(result => {
+        res.json(result);
+    })
+    .catch(err => {
+        res.status(500).send(err);
+    });
+};
