@@ -1,6 +1,6 @@
 // controlador.js
 
-const { Valoracion, Contenido } = require('./modelo');
+1
 
 // Controlador para obtener todas las series
 exports.obtenerSeries = async (req, res) => {

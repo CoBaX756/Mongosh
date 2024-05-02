@@ -34,6 +34,9 @@ const contenidoSchema = new mongoose.Schema({
     duracion: Number, // Duración de la película en minutos
     director: String,
     temporadas: [temporadaSchema] // Array de temporadas (solo para series)
+}, {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
 });
 contenidoSchema.virtual('valoracionMedia').get(function() {
     if (this.valoraciones && this.valoraciones.length > 0) {
