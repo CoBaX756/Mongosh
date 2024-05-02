@@ -62,18 +62,18 @@ exports.modificarContenido = async (req, res) => {
 const Serie = require('./modelo').Serie;
 const Pelicula = require('./modelo').Pelicula;
 
-exports.obtenerSeriesPorGenero = async (req, res) => {
+exports.obtenerSeriesPorGeneros = async (req, res) => {
     try {
-        const series = await Serie.find({ genero: req.params.genero });
+        const series = await Serie.find({ generos: req.params.genero });
         res.json(series);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
 };
 
-exports.obtenerPeliculasPorGenero = async (req, res) => {
+exports.obtenerPeliculasPorGeneros = async (req, res) => {
     try {
-        const peliculas = await Pelicula.find({ genero: req.params.genero });
+        const peliculas = await Pelicula.find({ generos: req.params.genero });
         res.json(peliculas);
     } catch (err) {
         res.status(500).json({ message: err.message });
@@ -81,9 +81,9 @@ exports.obtenerPeliculasPorGenero = async (req, res) => {
 };
 
 // Controlador para obtener contenido por género
-exports.obtenerContenidoPorGenero = async (req, res) => {
+exports.obtenerContenidoPorGeneros = async (req, res) => {
     try {
-        const contenido = await Contenido.find({ genero: req.params.genero });
+        const contenido = await Contenido.find({ generos: req.params.genero });
         res.json(contenido);
     } catch (error) {
         res.status(500).json({ mensaje: 'Error al obtener el contenido', error: error.message });
