@@ -197,3 +197,16 @@ exports.modificarDocumental = async (req, res) => {
         res.status(400).send(error);
     }
 };
+
+
+exports.obtenerDocumentalesArnold = async (req, res) => {
+    try {
+        const documentales = await Contenido.find({ 
+            tipo: 'documental', 
+            expertos: { $elemMatch: { nombre: 'Arnold', apellido: 'Schwarzenegger' } } 
+        });
+        res.send(documentales);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+};
