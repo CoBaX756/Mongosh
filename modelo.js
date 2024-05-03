@@ -22,17 +22,24 @@ const temporadaSchema = new mongoose.Schema({
     capitulos: [capituloSchema] // Array de capítulos
 });
 
-// Esquema para los contenidos (películas y series)
+const expertoSchema = new mongoose.Schema({
+    nombre: String,
+    apellido: String,
+    cargo: String
+});
+
+// Esquema para los contenidos (películas, series y documentales)
 const contenidoSchema = new mongoose.Schema({
     titulo: String,
-    tipo: { type: String, enum: ['pelicula', 'serie'] },
+    tipo: { type: String, enum: ['pelicula', 'serie', 'documental'] },
     descripcion: String,
     valoraciones: [valoracionSchema], // Array de valoraciones
     generos: [String],
     numeroReproducciones: Number,
     premios: [String],
-    duracion: Number, // Duración de la película en minutos
-    director: String,
+    duracion: Number, // Duración de la película/documental en minutos
+    director: String, // Director de la película/documental
+    expertos: [expertoSchema], // Array de expertos (solo para documentales)
     temporadas: [temporadaSchema] // Array de temporadas (solo para series)
 }, {
     toJSON: { virtuals: true },
@@ -51,6 +58,7 @@ const Valoracion = mongoose.model('Valoracion', valoracionSchema);
 const Contenido = mongoose.model('Contenido', contenidoSchema);
 const Capitulo = mongoose.model('Capitulo', capituloSchema);
 const Temporada = mongoose.model('Temporada', temporadaSchema);
+const Experto = mongoose.model('Experto', expertoSchema);
 
 // Exportar los modelos para su uso en otros archivos
 module.exports = { Valoracion, Contenido, Capitulo, Temporada };
