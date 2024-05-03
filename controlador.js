@@ -146,3 +146,18 @@ exports.altaDocumental = async (req, res) => {
         res.status(500).send(error);
     }
 };
+
+
+exports.bajaDocumental = async (req, res) => {
+    try {
+        const documental = await Contenido.findOneAndDelete({ _id: req.params.id, tipo: 'documental' });
+
+        if (!documental) {
+            return res.status(404).send();
+        }
+
+        res.send(documental);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+};

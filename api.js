@@ -25,5 +25,7 @@ router.get('/top10resumido', controlador.top10resumido);
 
 //EXAMEN
 router.post('/altaDocumental', controlador.altaDocumental);
+router.delete('/bajaDocumental/:id', controlador.bajaDocumental); 
+
 
 module.exports = router;
