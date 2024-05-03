@@ -161,3 +161,13 @@ exports.bajaDocumental = async (req, res) => {
         res.status(500).send(error);
     }
 };
+
+
+exports.obtenerDocumentales = async (req, res) => {
+    try {
+        const documentales = await Contenido.find({ tipo: 'documental' });
+        res.send(documentales);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+};
