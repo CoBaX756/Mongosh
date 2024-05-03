@@ -203,12 +203,8 @@ exports.obtenerDocumentalesArnold = async (req, res) => {
     try {
         const documentales = await Contenido.find({ 
             tipo: 'documental', 
-            expertos: { 
-                $elemMatch: { 
-                    nombre: { $regex: new RegExp("^" + 'arnold' + "$", 'i') }, 
-                    apellido: { $regex: new RegExp("^" + 'schwarzenegger' + "$", 'i') } 
-                } 
-            } 
+            'expertos.nombre': 'Arnold', 
+            'expertos.apellido': 'Schwarzenagger' 
         });
         res.send(documentales);
     } catch (error) {
