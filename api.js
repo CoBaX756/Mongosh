@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const controlador = require('./controlador'); // Asegúrate de que el nombre del archivo del controlador sea correcto
+const controlador = require('./controlador'); 
 
 router.get('/status', (req, res) => {
     res.send('El servidor está en funcionamiento');
@@ -10,11 +10,11 @@ router.get('/series', controlador.obtenerSeries);
 
 router.get('/peliculas', controlador.obtenerPeliculas);
 
-router.post('/alta', controlador.altaContenido); // Ruta para dar de alta un contenido
+router.post('/alta', controlador.altaContenido); 
 
-router.delete('/baja/:id', controlador.bajaContenido); // Ruta para eliminar contenido
+router.delete('/baja/:id', controlador.bajaContenido); 
 
-router.put('/modificar/:id', controlador.modificarContenido); // Ruta para modificar contenido
+router.put('/modificar/:id', controlador.modificarContenido);
 
 router.get('/series/:genero', controlador.obtenerSeriesPorGeneros);
 router.get('/peliculas/:genero', controlador.obtenerPeliculasPorGeneros);
@@ -28,7 +28,10 @@ router.post('/altaDocumental', controlador.altaDocumental);
 
 router.delete('/bajaDocumental/:id', controlador.bajaDocumental); 
 
+router.put('/modificarDocumental/:id', controlador.modificarDocumental); 
+
 router.get('/documentales', controlador.obtenerDocumentales); 
+
 
 
 module.exports = router;

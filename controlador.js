@@ -171,3 +171,29 @@ exports.obtenerDocumentales = async (req, res) => {
         res.status(500).send(error);
     }
 };
+
+
+
+exports.modificarDocumental = async (req, res) => {
+    const updates = Object.keys(req.body);
+    const allowedUpdates = ['titulo', 'descripcion', 'generos', 'duracion', 'director', 'expertos'];
+    const isValidOperation = updates.every((update) => allowedUpdates.includes(update));
+
+    if (!isValidOperation) {
+        return res.status(400).send({ error: 'Actualizaciones inválidas!' });
+    }
+
+    try {
+        const documental = await Contenido.findOne({ _id: req.params.id, tipo: 'documental' });
+
+        if (!documental) {
+            return res.status(404).send();
+        }
+
+        updates.forEach((update) => documental[update] = req.body[update]);
+        await documental.save();
+        res.send(documental);
+    } catch (error) {
+        res.status(400).send(error);
+    }
+};
