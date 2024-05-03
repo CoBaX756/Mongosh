@@ -23,4 +23,7 @@ router.get('/contenido/:genero', controlador.obtenerContenidoPorGeneros);
 router.get('/top10', controlador.obtenerTop10);
 router.get('/top10resumido', controlador.top10resumido);
 
+//EXAMEN
+router.post('/altaDocumental', controlador.altaDocumental);
+
 module.exports = router;

@@ -124,3 +124,25 @@ exports.top10resumido = (req, res) => {
         res.status(500).send(err);
     });
 };
+
+//EXAMEN    
+
+
+exports.altaDocumental = async (req, res) => {
+    try {
+        const documental = new Contenido({
+            tipo: 'documental',
+            titulo: req.body.titulo,
+            descripcion: req.body.descripcion,
+            generos: req.body.generos,
+            duracion: req.body.duracion,
+            director: req.body.director,
+            expertos: req.body.expertos
+        });
+
+        await documental.save();
+        res.status(201).send(documental);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+};
