@@ -199,12 +199,15 @@ exports.modificarDocumental = async (req, res) => {
 };
 
 
-exports.obtenerDocumentalesArnold = async (req, res) => {
+exports.obtenerDocumentalesPorExperto = async (req, res) => {
+    const nombre = req.query.nombre;
+    const apellido = req.query.apellido;
+
     try {
         const documentales = await Contenido.find({ 
             tipo: 'documental', 
-            'expertos.nombre': 'Arnold', 
-            'expertos.apellido': 'Schwarzenagger' 
+            'expertos.nombre': nombre, 
+            'expertos.apellido': apellido 
         });
         res.send(documentales);
     } catch (error) {

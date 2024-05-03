@@ -32,6 +32,6 @@ router.put('/modificarDocumental/:id', controlador.modificarDocumental);
 
 router.get('/documentales', controlador.obtenerDocumentales); 
 
-router.get('/documentalesArnold', controlador.obtenerDocumentalesArnold); 
+router.get('/documentalesExperto', controlador.obtenerDocumentalesPorExperto);
 
 module.exports = router;
